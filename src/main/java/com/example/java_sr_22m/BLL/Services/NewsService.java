@@ -43,7 +43,7 @@ public class NewsService implements INewsService {
 
     @Override
     public String UpdateNews(NewsUpdateDto newsUpdateDto) {
-        Optional<News> candidate = newsRepo.findById(newsUpdateDto.Id);
+        Optional<News> candidate = newsRepo.findById(newsUpdateDto.id);
 
         if (candidate.isEmpty())
             throw new RuntimeException();
@@ -55,6 +55,7 @@ public class NewsService implements INewsService {
         news.setCategory(newsUpdateDto.category);
         news.setModifyDate(new Date());
 
+        newsRepo.save(news);
         return "Новость успешно обновлена";
     }
 }
